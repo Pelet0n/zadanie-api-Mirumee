@@ -18,7 +18,7 @@ for row in response_json:
 
    cur.execute(sql) 
 
-wypisz = f"SELECT * FROM dane"
+wypisz = "SELECT * FROM dane"
 
 for row in cur.execute(wypisz):
     print(row)
