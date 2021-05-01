@@ -3,6 +3,10 @@ import sqlite3
 import csv
 import sys
 
+class Error(Exception):
+    pass
+
+
 con = sqlite3.connect('dane.db')
 cur = con.cursor()
 
@@ -13,7 +17,14 @@ except:
     print('Tabela już istnieje!')
 
 
-response_json = requests.get('https://api.spacexdata.com/v3/launches').json()
+def fetch_data_spacex(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print("Nie udało się połączyć z serwerem")
+    return response.json()
+
 
 def check_database():
     sql = 'SELECT * FROM dane'
@@ -27,7 +38,7 @@ if(check_database() == True):
         print(row)
     sys.exit()
 
-for row in response_json:
+for row in fetch_data_spacex('https://api.pacexdata.com/v3/launches'):
    
    sql = f"INSERT INTO dane VALUES('{row['flight_number']}','{row['mission_name']}','{row['rocket']['rocket_id']}','{row['rocket']['rocket_name']}','{row['launch_date_utc']}','{row['links']['video_link']}')"
 
