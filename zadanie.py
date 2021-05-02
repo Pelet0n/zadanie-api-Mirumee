@@ -23,9 +23,9 @@ def fetch_data_spacex(url):
     except requests.exceptions.ConnectionError as e:
         print(f"Connection error \n{e}")
     except requests.exceptions.HTTPError as e:
-        print(f"HTTP error \n{e}",)
+        print(f"HTTP error \n{e}")
     except requests.exceptions.Timeout as e:
-        print(f"Timeout error \n{e}v")
+        print(f"Timeout error \n{e}")
     except requests.exceptions.RequestException as e:
         print(f"Something else is wrong \n{e}")
     
