@@ -38,7 +38,7 @@ if(not response):
 
 for row in response:
    
-   sql = f"REPLACE INTO data VALUES('{row['flight_number']}','{row['mission_name']}','{row['rocket']['rocket_id']}','{row['rocket']['rocket_name']}','{row['launch_date_utc']}','{row['links']['video_link']}')"
+   sql = f"INSERT INTO data VALUES('{row['flight_number']}','{row['mission_name']}','{row['rocket']['rocket_id']}','{row['rocket']['rocket_name']}','{row['launch_date_utc']}','{row['links']['video_link']}')"
    cur.execute(sql) 
 
    with open('data.csv','a+',newline='') as csvfile:
